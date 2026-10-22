@@ -12,3 +12,14 @@ backend/data/*.db
 backend/data/chroma/
 .DS_Store
 models/*.gguf
+
+**/__pycache__/
+**/.pytest_cache/
+**/node_modules/
+**/dist/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+backend/data/sample_log.txt
+sample_log.txt
+*.log
