@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      LOCAL_MODEL_BASE_URL: http://host.docker.internal:1235/v1
+      DATABASE_PATH: /data/infraguide.db
+      CORS_ORIGINS: http://localhost:5173
+    volumes:
+      - infraguide-data:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+volumes:
+  infraguide-data:

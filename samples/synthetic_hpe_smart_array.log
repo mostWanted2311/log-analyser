@@ -1,0 +1,13 @@
+# SYNTHETIC HPE SMART ARRAY FIXTURE - NOT A REAL INCIDENT
+Smart Array Controller in Slot 0
+Controller Status: OK
+Cache Status: Permanently Disabled
+Cache Status Details: Cache disabled; backup power source failed to charge to an acceptable level
+Cache Disable Reason: Backup power source attached to flash-backed write cache has failed to charge
+Drive Write Cache: Disabled
+Cache Backup Power Source: Capacitors
+Battery/Capacitor Status: Failed (Replace Batteries)
+Logical Drive: 1
+Status: OK
+physicaldrive 1I:1:1
+Status: OK

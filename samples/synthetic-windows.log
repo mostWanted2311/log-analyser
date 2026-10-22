@@ -1,0 +1,5 @@
+2026-10-20T10:14:02Z INFO host=WIN-APP-07 service=Inventory started
+2026-10-20T10:15:12Z WARNING host=WIN-APP-07 connection pool nearing limit
+2026-10-20T10:16:41Z ERROR host=WIN-APP-07 Event ID: 4102 database connection timeout
+2026-10-20T10:16:44Z ERROR host=WIN-APP-07 Event ID: 4102 database connection timeout
+2026-10-20T10:18:02Z INFO host=WIN-APP-07 retry succeeded

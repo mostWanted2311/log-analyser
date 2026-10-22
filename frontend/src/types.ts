@@ -1,0 +1,7 @@
+export type Evidence = { evidence_id: string; source_file: string; line_number?: number | null; timestamp?: string | null; severity: string; message: string };
+export type Finding = { finding_id: string; title: string; detail: string; severity: string; evidence_ids: string[] };
+export type Hypothesis = { hypothesis_id: string; title: string; explanation: string; confidence: string; evidence_ids: string[]; alternatives: string[] };
+export type Source = { source_id: string; title: string; publisher: string; url: string; retrieved_at: string; supports: string[] };
+export type Action = { action_id: string; title: string; description: string; priority: string; reason: string; evidence_ids: string[]; source_ids: string[]; risk_category: string; prerequisites: string[]; expected_observations: string[]; suggested_follow_up: string; requires_authorization: boolean; score: number; score_factors: Record<string, number> };
+export type Analysis = { incident_id: string; status: string; summary: string; detected_log_type: string; severity: string; findings: Finding[]; hypotheses: Hypothesis[]; actions: Action[]; evidence: Evidence[]; sources: Source[]; safety_notes: string[]; missing_information: string[]; limitations: string[] };
+export type Message = { role: "user" | "assistant"; content: string; created_at: string };

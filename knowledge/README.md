@@ -1,0 +1,5 @@
+# Curated Knowledge Index
+
+Only index documentation you are permitted to use. The `/api/knowledge/index` endpoint accepts an administrator-provided title, publisher, canonical HTTPS URL, product family/version, and text content. It does not crawl URLs. The backend validates the URL host against `TRUSTED_DOMAINS`, stores chunks and source metadata in local SQLite, and performs local keyword retrieval. No embedding service or model endpoint is used.
+
+Set a strong `ADMIN_API_KEY` before exposing the endpoint. Call it with `X-Admin-Key`; do not place this credential in the browser. Documentation is untrusted input. Re-index only content whose licensing and source terms permit it. Displayed source metadata comes from the submitted records, and source cards are shown only for actually retrieved records.
