@@ -61,7 +61,7 @@ sequenceDiagram
 - `POST /api/incidents` performs analysis synchronously. The request does not return an accepted/background job state.
 - The parser supports `.log`, `.txt`, `.csv`, `.json`, and `.zip` of supported files. EVTX is rejected because an EVTX parser is not installed.
 - Text records are bounded to 10,000 per file; ZIP processing is bounded by archive entry count, unpacked bytes, and 30,000 aggregate events. Limits are implementation details and may be tightened.
-- Findings and the HPE Smart Array cache rule are deterministic. If enabled, LM Studio may add evidence-linked hypotheses. Invalid or unavailable model output leaves deterministic results in place.
+- Findings from supported parsers and rules are deterministic. If enabled, LM Studio may add evidence-linked hypotheses. Invalid or unavailable model output leaves deterministic results in place.
 - Recommendations pass evidence-reference checks and a separate risk gate. The gate permits only `read_only` and `reversible` action categories. No infrastructure commands are executed.
 - Documentation ingestion stores permitted text and metadata in SQLite. Retrieval is local keyword matching, not vector search or web crawling. A source is shown only when it was indexed, matched, and passed the configured trusted-domain check.
 - Chat history is bounded in SQLite. Action outcomes are user feedback, not verified ground truth.

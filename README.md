@@ -5,27 +5,20 @@ InfraGuide AI is a local-first infrastructure log analyzer. It parses logs on th
 ## Documentation
 
 - [Architecture and data flow](docs/architecture.md)
-- [HPE Smart Array cache troubleshooting](docs/troubleshooting-guide.md)
 - [API reference](backend/API.md)
 - [Evaluation procedure](backend/EVALUATION.md)
 - [Curated knowledge ingestion](knowledge/README.md)
-
-## HPE Smart Array sample diagnosis
-
-The parser recognizes structured hardware state, not only words such as `ERROR`. For the supplied report, it detects `Cache Status: Permanently Disabled`, the `Cache Status Details` failed-charge reason, and the failed battery/capacitor status. The resulting finding points to those exact lines. It recommends confirming current controller/capacitor alerts through the installed management utility and keeping write-cache protection unchanged while a server-specific service plan is prepared. It does not infer disk failure or data loss from this excerpt.
-
-A sanitized test fixture is at [samples/synthetic_hpe_smart_array.log](samples/synthetic_hpe_smart_array.log); it does not contain the serial numbers from the supplied log. The original `backend/data/sample_log.txt` remains local and should not be committed or shared.
 
 ## Features
 
 - React, Vite, TypeScript, Tailwind CSS upload and incident dashboard with evidence, timeline, recommendations, source links, contextual chat, and outcome feedback.
 - FastAPI API with validated incident, evidence, analysis, source, chat, feedback, and health routes.
 - `.log`, `.txt`, `.csv`, `.json`, and ZIP containing supported files. EVTX is rejected with an explanatory message.
-- Deterministic event parsing, HPE Smart Array cache/capacitor rules, evidence-linked hypotheses, bounded upload/archive handling, best-effort secret redaction, and SQLite persistence.
+- Deterministic event parsing, evidence-linked hypotheses, bounded upload/archive handling, best-effort secret redaction, and SQLite persistence.
 - Optional local chat/analysis through LM Studio's OpenAI-compatible API. The backend accepts only localhost/loopback or Docker Desktop's `host.docker.internal`; no hosted model client is included.
 - Curated documentation indexing stores submitted text and trusted HTTPS metadata in local SQLite; retrieval uses local keyword matching and never crawls URLs. No source citation is shown unless it was actually indexed and retrieved.
 - Transparent heuristic ranking (35% evidence, 25% documentation, 20% product compatibility, 20% diagnostic value) with separate risk/evidence gates. These weights are uncalibrated.
-- The application recommends only. It does not execute shell, PowerShell, iLO, or storage commands and does not modify infrastructure.
+- The application recommends only. It does not execute system or infrastructure commands and does not modify infrastructure.
 
 ## Local model through LM Studio
 
@@ -68,8 +61,8 @@ See [knowledge/README.md](knowledge/README.md). `POST /api/knowledge/index` stor
 
 ## Tests
 
-Backend: `cd backend; python -m pytest -q`. Focused sample coverage: `python -m pytest tests/test_hpe_cache.py -q`. Frontend build: `cd frontend; npm install; npm run build`. Synthetic expected behavior is described in [samples/EXPECTED.md](samples/EXPECTED.md).
+Backend tests: `cd backend; python -m pytest -q`. Frontend build: `cd frontend; npm install; npm run build`. Synthetic expected behavior is described in [samples/EXPECTED.md](samples/EXPECTED.md).
 
 ## Limits and privacy
 
-This is a prototype, not a production incident platform. EVTX parsing, full VMware/HPE adapter coverage, asynchronous job processing, user authentication/tenant isolation, retention jobs, semantic vector retrieval, live web search, and calibrated ranking are not implemented. HPE cache rules recognize only the explicit conditions described above; physical component diagnosis still requires the exact server/controller service guide and operator verification. Uploaded event data persists in SQLite until removed. Redaction is best-effort. Keep production logs local and do not upload them to any deployment without approved access, retention, and data-handling controls.
+This is a prototype, not a production incident platform. EVTX parsing, full format-specific adapter coverage, asynchronous job processing, user authentication/tenant isolation, retention jobs, semantic vector retrieval, live web search, and calibrated ranking are not implemented. Uploaded event data persists in SQLite until removed. Redaction is best-effort. Keep production logs local and do not upload them to any deployment without approved access, retention, and data-handling controls.
