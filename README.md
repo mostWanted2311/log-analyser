@@ -2,6 +2,14 @@
 
 InfraGuide AI is a local-first infrastructure log analyzer. It parses logs on the backend, links findings to exact source records, and recommends human-reviewed troubleshooting steps. Optional model chat and analysis use the LM Studio server on this PC; the application does not call hosted AI APIs.
 
+## Documentation
+
+- [Architecture and data flow](docs/architecture.md)
+- [HPE Smart Array cache troubleshooting](docs/troubleshooting-guide.md)
+- [API reference](backend/API.md)
+- [Evaluation procedure](backend/EVALUATION.md)
+- [Curated knowledge ingestion](knowledge/README.md)
+
 ## HPE Smart Array sample diagnosis
 
 The parser recognizes structured hardware state, not only words such as `ERROR`. For the supplied report, it detects `Cache Status: Permanently Disabled`, the `Cache Status Details` failed-charge reason, and the failed battery/capacitor status. The resulting finding points to those exact lines. It recommends confirming current controller/capacitor alerts through the installed management utility and keeping write-cache protection unchanged while a server-specific service plan is prepared. It does not infer disk failure or data loss from this excerpt.
@@ -52,7 +60,7 @@ Prerequisites: Python 3.11+, Node.js 20+, npm. LM Studio is optional for determi
 For Docker Compose, set `.env` and configure LM Studio to accept a connection from Docker at `host.docker.internal:1235`. This may require enabling local-network serving in LM Studio; restrict access to your trusted machine/network. Then run `docker compose up --build`. For a localhost-only setup, run the backend directly on Windows instead. Open `http://localhost:5173`. SQLite persists in a Docker volume.
 ## Configuration
 
-`LOCAL_MODEL_ENABLED` enables LM Studio requests. `LOCAL_MODEL_BASE_URL` points to its local OpenAI-compatible API, and `LOCAL_MODEL_NAME` selects the loaded model. `LOCAL_MODEL_TIMEOUT_SECONDS` bounds requests. `MAX_UPLOAD_MB`, `DATABASE_PATH`, `TRUSTED_DOMAINS`, `ADMIN_API_KEY`, and `CORS_ORIGINS` configure the API. `VITE_API_URL` configures the frontend backend URL.
+`LOCAL_MODEL_ENABLED` enables LM Studio requests. `LOCAL_MODEL_BASE_URL` points to its local OpenAI-compatible API, and `LOCAL_MODEL_NAME` selects the loaded model. `LOCAL_MODEL_TIMEOUT_SECONDS` bounds requests. `MAX_UPLOAD_MB`, `DATABASE_PATH` (relative paths resolve from the backend process working directory), `TRUSTED_DOMAINS`, `ADMIN_API_KEY`, and `CORS_ORIGINS` configure the API. `VITE_API_URL` configures the frontend backend URL.
 
 ## Curated documentation
 
