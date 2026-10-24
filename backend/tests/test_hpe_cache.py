@@ -51,12 +51,12 @@ def test_lm_studio_chat_uses_local_endpoint_and_schema(monkeypatch):
         return Response()
 
     monkeypatch.setenv("LOCAL_MODEL_BASE_URL", "http://127.0.0.1:1235/v1")
-    monkeypatch.setenv("LOCAL_MODEL_NAME", "gemma-4-12b-it-qat")
+    monkeypatch.setenv("LOCAL_MODEL_NAME", "ministral-3-8b-instruct-2512")
     monkeypatch.setattr(ai.httpx, "post", fake_post)
     result = ai._chat([{"role": "user", "content": "test"}], json_mode=True)
 
     assert result == "{\"hypotheses\": []}"
     assert captured["url"] == "http://127.0.0.1:1235/v1/chat/completions"
-    assert captured["payload"]["model"] == "gemma-4-12b-it-qat"
+    assert captured["payload"]["model"] == "ministral-3-8b-instruct-2512"
     assert captured["payload"]["response_format"]["type"] == "json_schema"
     assert captured["trust_env"] is False

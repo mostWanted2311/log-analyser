@@ -21,7 +21,7 @@ A sanitized test fixture is at [samples/synthetic_hpe_smart_array.log](samples/s
 
 ## Local model through LM Studio
 
-Load `gemma-4-12B-it-qat-q4_0-gguf` in LM Studio, start its local server in the Developer tab, and use the model ID reported by `GET http://localhost:1235/v1/models`. This workspace currently sees `gemma-4-12b-it-qat` at that endpoint. Set `.env` to `LOCAL_MODEL_ENABLED=true`, `LOCAL_MODEL_BASE_URL=http://127.0.0.1:1235/v1`, and `LOCAL_MODEL_NAME=gemma-4-12b-it-qat`. The backend sends bounded, redacted evidence to this local endpoint only; if LM Studio is unavailable, analysis remains deterministic and chat falls back with an explicit provider status. No model runtime is installed in the backend; LM Studio owns loading and running the model. Model weights are not downloaded by the app.
+Load `ministral-3-8b-instruct-2512-q4_0-gguf` in LM Studio, start its local server in the Developer tab, and use the model ID reported by `GET http://localhost:1235/v1/models`. This workspace currently sees `ministral-3-8b-instruct-2512` at that endpoint. Set `.env` to `LOCAL_MODEL_ENABLED=true`, `LOCAL_MODEL_BASE_URL=http://127.0.0.1:1235/v1`, and `LOCAL_MODEL_NAME=ministral-3-8b-instruct-2512`. The backend sends bounded, redacted evidence to this local endpoint only; if LM Studio is unavailable, analysis remains deterministic and chat falls back with an explicit provider status. No model runtime is installed in the backend; LM Studio owns loading and running the model. Model weights are not downloaded by the app.
 ## Run locally
 
 Prerequisites: Python 3.11+, Node.js 20+, npm. LM Studio is optional for deterministic analysis and required for local model chat/analysis.

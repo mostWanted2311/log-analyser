@@ -17,7 +17,7 @@ def _local_base_url() -> str:
 
 def _chat(messages: list[dict], json_mode: bool = False, max_tokens: int = 900) -> str:
     payload = {
-        "model": os.getenv("LOCAL_MODEL_NAME", "gemma-4-12b-it-qat"),
+        "model": os.getenv("LOCAL_MODEL_NAME", "ministral-3-8b-instruct-2512"),
         "messages": messages,
         "temperature": 0.1,
         "max_tokens": max_tokens,
@@ -74,7 +74,7 @@ def local_model_status() -> str:
         )
         response.raise_for_status()
         model_ids = {item.get("id") for item in response.json().get("data", [])}
-        return "local_api_ready" if os.getenv("LOCAL_MODEL_NAME", "gemma-4-12b-it-qat") in model_ids else "local_model_not_loaded"
+        return "local_api_ready" if os.getenv("LOCAL_MODEL_NAME", "ministral-3-8b-instruct-2512") in model_ids else "local_model_not_loaded"
     except ValueError:
         return "local_config_invalid"
     except (httpx.HTTPError, KeyError, TypeError, ValueError):
